@@ -62,10 +62,17 @@ namespace SocketClient
                     sendBuff = Encoding.ASCII.GetBytes(sendString);
                     client.Send(sendBuff);
 
-                    if (sendString.ToUpper().Trim() == "QUIT") ;
+                    if (sendString.ToUpper().Trim() == "QUIT") 
                     {
                         break;
                     }
+
+                    nReceivedBytes=client.Receive(ReceiveBuff);
+                    receivedString = Encoding.ASCII.GetString(ReceiveBuff, 0, nReceivedBytes);
+                    Console.WriteLine("S: " + receivedString);
+
+                    Array.Clear(sendBuff, 0, sendBuff.Length);
+
 
                 }
 
